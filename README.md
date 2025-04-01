@@ -23,3 +23,64 @@ Options are displayed to users in a dialog box format. Once the user makes their
 Be cautious and thoroughly evaluate scripts and automation tasks obtained from external sources. <a href="https://github.com/tteck/Proxmox/blob/main/CODE-AUDIT.md">Read more</a>
 </p>
 <sub><div align="center"> Proxmox® is a registered trademark of Proxmox Server Solutions GmbH. </div></sub>
+
+
+Copied from original post: [tteck/Proxmox#2072](https://github.com/tteck/Proxmox/discussions/2072)
+## Setting up Cloud-Init
+![image](https://github.com/adelerhof/repository/blob/main/img/proxmox-cloud-init.png)
+
+    1. Set user to root
+
+    2. Give root user a password
+
+    3. Set to no (not enough storage, yet)
+
+    4. Set network settings
+
+    5. Regenerate Image
+
+
+**Now you can start the VM**
+### Select xterm.js under the Console pull down for copy/paste functions
+
+![image](https://github.com/adelerhof/repository/blob/main/img/proxmox-xterm.png)
+## Resize the Bootdisk (/dev/sda)
+### Hardware > Hard Disk (scsi0) > Disk Action > Resize
+
+![image](https://github.com/adelerhof/repository/blob/main/img/proxmox-disk-resize.png)
+## Expand VM Disk using parted (/dev/sda1)
+
+`parted /dev/sda` `resizepart 1` Fix/Ignore? `Fix` Partition number? `1` Yes/No? `Yes` End? [2146MB]? `-0` (parted) `quit` **reboot**
+## Get SSH Going
+
+```
+sed -i -e 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' -e 's/^PasswordAuthentication.*/PasswordAuthentication yes/' /etc/ssh/sshd_config
+rm /etc/ssh/sshd_config.d/60-cloudimg-settings.conf
+systemctl restart sshd
+```
+
+## Add Guest Agent
+
+```
+apt-get update && apt-get -y upgrade
+apt-get install -y qemu-guest-agent
+```
+
+**reboot**
+## Install Docker
+
+```
+sh <(curl -sSL https://get.docker.com)
+```
+
+## Install Docker Compose
+
+```
+LATEST=$(curl -sL https://api.github.com/repos/docker/compose/releases/latest | grep '"tag_name":' | cut -d'"' -f4)
+DOCKER_CONFIG=${DOCKER_CONFIG:-$HOME/.docker}
+mkdir -p $DOCKER_CONFIG/cli-plugins
+curl -sSL https://github.com/docker/compose/releases/download/$LATEST/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
+chmod +x $DOCKER_CONFIG/cli-plugins/docker-compose
+docker compose version
+```
+
