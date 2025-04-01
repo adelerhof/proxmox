@@ -27,7 +27,7 @@ Be cautious and thoroughly evaluate scripts and automation tasks obtained from e
 
 Copied from original post: [tteck/Proxmox#2072](https://github.com/tteck/Proxmox/discussions/2072)
 ## Setting up Cloud-Init
-![image](https://github.com/adelerhof/repository/blob/main/img/proxmox-cloud-init.png)
+![image](https://github.com/adelerhof/proxmox/blob/main/img/proxmox-cloud-init.png)
 
     1. Set user to root
 
@@ -43,11 +43,11 @@ Copied from original post: [tteck/Proxmox#2072](https://github.com/tteck/Proxmox
 **Now you can start the VM**
 ### Select xterm.js under the Console pull down for copy/paste functions
 
-![image](https://github.com/adelerhof/repository/blob/main/img/proxmox-xterm.png)
+![image](https://github.com/adelerhof/proxmox/blob/main/img/proxmox-xterm.png)
 ## Resize the Bootdisk (/dev/sda)
 ### Hardware > Hard Disk (scsi0) > Disk Action > Resize
 
-![image](https://github.com/adelerhof/repository/blob/main/img/proxmox-disk-resize.png)
+![image](https://github.com/adelerhof/proxmox/blob/main/img/proxmox-disk-resize.png)
 ## Expand VM Disk using parted (/dev/sda1)
 
 `parted /dev/sda` `resizepart 1` Fix/Ignore? `Fix` Partition number? `1` Yes/No? `Yes` End? [2146MB]? `-0` (parted) `quit` **reboot**
