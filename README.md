@@ -1,4 +1,3 @@
-<div style="border: 2px solid #d1d5db; padding: 20px; border-radius: 8px; background-color: #f9fafb;"> <h2 align="center">Proxmox VE Helper-Scripts: A Community Legacy</h2> <p>Dear Community,</p> <p>As we prepare to archive this repository, we’re excited to announce a new home for the project: <a href="https://github.com/community-scripts/ProxmoxVE">https://github.com/community-scripts/ProxmoxVE</a>. While we’re still settling in, this will soon become the go-to place for the latest Proxmox VE scripts.</p> <p>Thank you for your continued support.</p> <br>The Community </div>
 <div align="center">
   <a href="#">
     <img src="https://raw.githubusercontent.com/tteck/Proxmox/main/misc/images/logo.png" height="100px" />
@@ -15,6 +14,8 @@
 
 ---
 
+These scripts are forked (and edited) from the original repo from tteck.
+
 These scripts empower users to create a Linux container or virtual machine interactively, providing choices for both simple and advanced configurations. The basic setup adheres to default settings, while the advanced setup gives users the ability to customize these defaults. 
 
 Options are displayed to users in a dialog box format. Once the user makes their selections, the script collects and validates their input to generate the final configuration for the container or virtual machine.
@@ -23,8 +24,22 @@ Be cautious and thoroughly evaluate scripts and automation tasks obtained from e
 </p>
 <sub><div align="center"> Proxmox® is a registered trademark of Proxmox Server Solutions GmbH. </div></sub>
 
+<a> </a>
 
 Copied from original post: [tteck/Proxmox#2072](https://github.com/tteck/Proxmox/discussions/2072)
+
+## Quick Start
+### Create a new VM
+
+```bash
+bash -c "$(wget -qLO - https://github.com/tteck/Proxmox/raw/main/vm/ubuntu2404-vm.sh)"
+```
+### Create a new Container
+
+```bash
+bash -c "$(wget -qLO - https://github.com/adelerhof/proxmox/raw/main/ct/ubuntu.sh)"
+```
+
 ## Setting up Cloud-Init
 ![image](https://github.com/adelerhof/proxmox/blob/main/img/proxmox-cloud-init.png)
 
